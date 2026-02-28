@@ -294,5 +294,101 @@ namespace MathLibrary
         }
 
         #endregion
+        // Добавляем новые методы в MathLibrary/Calculator.cs
+
+        #region Расширенная функциональность
+
+        /// <summary>
+        /// Вычисляет площадь круга по радиусу
+        /// </summary>
+        /// <param name="radius">Радиус круга</param>
+        /// <returns>Площадь круга</returns>
+        public static double CircleArea(double radius)
+        {
+            if (radius < 0)
+                throw new ArgumentException("Радиус не может быть отрицательным");
+
+            return Math.PI * radius * radius;
+        }
+
+        /// <summary>
+        /// Вычисляет площадь круга по диаметру
+        /// </summary>
+        public static double CircleAreaFromDiameter(double diameter)
+        {
+            if (diameter < 0)
+                throw new ArgumentException("Диаметр не может быть отрицательным");
+
+            double radius = diameter / 2;
+            return CircleArea(radius);
+        }
+
+        /// <summary>
+        /// Конвертирует температуру из Цельсия в Фаренгейт
+        /// </summary>
+        public static double CelsiusToFahrenheit(double celsius)
+        {
+            return (celsius * 9 / 5) + 32;
+        }
+
+        /// <summary>
+        /// Конвертирует температуру из Фаренгейта в Цельсий
+        /// </summary>
+        public static double FahrenheitToCelsius(double fahrenheit)
+        {
+            return (fahrenheit - 32) * 5 / 9;
+        }
+
+        /// <summary>
+        /// Конвертирует температуру из Цельсия в Кельвины
+        /// </summary>
+        public static double CelsiusToKelvin(double celsius)
+        {
+            if (celsius < -273.15)
+                throw new ArgumentException("Температура ниже абсолютного нуля невозможна");
+
+            return celsius + 273.15;
+        }
+
+        /// <summary>
+        /// Конвертирует температуру из Кельвинов в Цельсий
+        /// </summary>
+        public static double KelvinToCelsius(double kelvin)
+        {
+            if (kelvin < 0)
+                throw new ArgumentException("Температура в Кельвинах не может быть отрицательной");
+
+            return kelvin - 273.15;
+        }
+
+        /// <summary>
+        /// Вычисляет гипотенузу прямоугольного треугольника по двум катетам
+        /// </summary>
+        public static double Hypotenuse(double a, double b)
+        {
+            if (a < 0 || b < 0)
+                throw new ArgumentException("Катеты не могут быть отрицательными");
+
+            return Math.Sqrt(a * a + b * b);
+        }
+
+        /// <summary>
+        /// Вычисляет катет прямоугольного треугольника по гипотенузе и другому катету
+        /// </summary>
+        public static double Leg(double hypotenuse, double otherLeg)
+        {
+            if (hypotenuse <= 0)
+                throw new ArgumentException("Гипотенуза должна быть положительной");
+
+            if (otherLeg < 0)
+                throw new ArgumentException("Катет не может быть отрицательным");
+
+            if (otherLeg >= hypotenuse)
+                throw new ArgumentException("Катет не может быть больше или равен гипотенузе");
+
+            return Math.Sqrt(hypotenuse * hypotenuse - otherLeg * otherLeg);
+        }
+
+        #endregion
     }
 }

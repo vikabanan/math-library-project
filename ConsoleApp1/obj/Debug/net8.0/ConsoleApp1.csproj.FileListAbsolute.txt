@@ -1,0 +1,5 @@
+C:\Users\IIIKY\Desktop\MathLibraryProject\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\IIIKY\Desktop\MathLibraryProject\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.AssemblyInfoInputs.cache
+C:\Users\IIIKY\Desktop\MathLibraryProject\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.AssemblyInfo.cs
+C:\Users\IIIKY\Desktop\MathLibraryProject\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\IIIKY\Desktop\MathLibraryProject\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.csproj.AssemblyReference.cache

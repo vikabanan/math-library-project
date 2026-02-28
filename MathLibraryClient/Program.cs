@@ -8,6 +8,7 @@ namespace MathLibraryClient
     {
         static void Main(string[] args)
         {
+            //kujyhgfd
             Console.WriteLine("Демонстрация работы MathLibrary.dll\n");
             Console.WriteLine("Программа демонстрирует все методы математической библиотеки\n");
 

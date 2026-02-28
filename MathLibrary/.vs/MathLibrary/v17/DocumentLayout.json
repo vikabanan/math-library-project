@@ -1,0 +1,68 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibrary\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6F1FDEE0-D58D-4474-9405-B1A7B2F0A4D0}|..\\ConsoleApp1\\ConsoleApp1.csproj|c:\\users\\iiiky\\desktop\\mathlibraryproject\\consoleapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F1FDEE0-D58D-4474-9405-B1A7B2F0A4D0}|..\\ConsoleApp1\\ConsoleApp1.csproj|c:\\users\\iiiky\\desktop\\mathlibraryproject\\consoleapp1\\consoleapp1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB55C1ED-C319-4F2D-871E-69CF73667678}|..\\MathLibraryClient\\MathLibraryClient.csproj|c:\\users\\iiiky\\desktop\\mathlibraryproject\\mathlibraryclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ConsoleApp1",
+              "DocumentMoniker": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\ConsoleApp1\\ConsoleApp1.csproj",
+              "RelativeDocumentMoniker": "..\\ConsoleApp1\\ConsoleApp1.csproj",
+              "ToolTip": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\ConsoleApp1\\ConsoleApp1.csproj",
+              "RelativeToolTip": "..\\ConsoleApp1\\ConsoleApp1.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-02-28T09:56:19.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\ConsoleApp1\\Program.cs",
+              "RelativeDocumentMoniker": "..\\ConsoleApp1\\Program.cs",
+              "ToolTip": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\ConsoleApp1\\Program.cs",
+              "RelativeToolTip": "..\\ConsoleApp1\\Program.cs",
+              "ViewState": "AgIAADQBAAAAAAAAAAAvwEoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-28T09:54:59.904Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibraryClient\\Program.cs",
+              "RelativeDocumentMoniker": "..\\MathLibraryClient\\Program.cs",
+              "ToolTip": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibraryClient\\Program.cs",
+              "RelativeToolTip": "..\\MathLibraryClient\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-28T09:53:27.845Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

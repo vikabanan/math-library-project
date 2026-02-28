@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibraryClient\\MathLibraryClient.csproj": {}
+    "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\ConsoleApp1\\ConsoleApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibraryClient\\MathLibraryClient.csproj": {
+    "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\ConsoleApp1\\ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibraryClient\\MathLibraryClient.csproj",
-        "projectName": "MathLibraryClient",
-        "projectPath": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibraryClient\\MathLibraryClient.csproj",
+        "projectUniqueName": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectName": "ConsoleApp1",
+        "projectPath": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\ConsoleApp1\\ConsoleApp1.csproj",
         "packagesPath": "C:\\Users\\IIIKY\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibraryClient\\obj\\",
+        "outputPath": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\ConsoleApp1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\IIIKY\\AppData\\Roaming\\NuGet\\NuGet.Config",

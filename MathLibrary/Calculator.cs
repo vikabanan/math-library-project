@@ -1,33 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// Оптимизируем существующие методы в MathLibrary/Calculator.cs
+
+using System;
+using System.Collections.Concurrent;
+using System.Runtime.CompilerServices;
 
 namespace MathLibrary
 {
-    /// <summary>
-    /// Предоставляет набор математических операций и алгоритмов
-    /// </summary>
     public static class Calculator
     {
+        #region Кэширование
+
+        private static readonly ConcurrentDictionary<int, bool> PrimeCache =
+            new ConcurrentDictionary<int, bool>();
+
+        private static readonly double[] PowerOfTwoCache = new double[1024];
+
+        // Добавлено: объявление FactorialCache
+        private static readonly long[] FactorialCache = new long[21];
+
+        static Calculator()
+        {
+            // Предвычисление факториалов
+            FactorialCache[0] = 1;
+            for (int i = 1; i <= 20; i++)
+            {
+                FactorialCache[i] = FactorialCache[i - 1] * i;
+            }
+
+            // Предвычисление степеней двойки
+            for (int i = 0; i < 1024; i++)
+            {
+                PowerOfTwoCache[i] = Math.Pow(2, i);
+            }
+        }
+
+        #endregion
+
         #region Базовые арифметические операции
 
-        /// <summary>
-        /// Складывает два числа
-        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Add(double a, double b) => a + b;
 
-        /// <summary>
-        /// Вычитает второе число из первого
-        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Subtract(double a, double b) => a - b;
 
-        /// <summary>
-        /// Умножает два числа
-        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Multiply(double a, double b) => a * b;
 
-        /// <summary>
-        /// Делит первое число на второе с проверкой на ноль
-        /// </summary>
         public static double Divide(double a, double b)
         {
             ValidateDivisor(b);
@@ -38,108 +57,83 @@ namespace MathLibrary
 
         #region Проверка чисел
 
-        /// <summary>
-        /// Оптимизированная проверка числа на простоту
-        /// </summary>
-        private static Dictionary<int, bool> _primeCache = new Dictionary<int, bool>();
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPrime(int number)
         {
-            if (_primeCache.TryGetValue(number, out bool cachedResult))
-                return cachedResult;
+            if (number < 2) return false;
+            if (number <= 3) return true;
+            if ((number & 1) == 0) return false;
 
-            bool result = IsPrimeInternal(number);
-            _primeCache[number] = result;
+            if (PrimeCache.TryGetValue(number, out bool cached))
+                return cached;
+
+            bool result = IsPrimeOptimized(number);
+            PrimeCache[number] = result;
             return result;
         }
 
-        private static bool IsPrimeInternal(int number)
+        private static bool IsPrimeOptimized(int number)
         {
-            if (number <= 1) return false;
-            if (number == 2) return true;
-            if (number % 2 == 0) return false;
+            if (number % 3 == 0) return number == 3;
 
             int limit = (int)Math.Sqrt(number);
-
-            for (int i = 3; i <= limit; i += 2)
+            for (int i = 5; i <= limit; i += 6)
             {
-                if ((number % i) == 0)
+                if (number % i == 0 || number % (i + 2) == 0)
                     return false;
             }
 
             return true;
         }
 
-        /// <summary>
-        /// Быстрая проверка четности числа
-        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEven(int number) => (number & 1) == 0;
 
-        /// <summary>
-        /// Быстрая проверка нечетности числа
-        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsOdd(int number) => (number & 1) == 1;
 
         #endregion
 
         #region Возведение в степень
 
-        /// <summary>
-        /// Быстрое возведение в степень (бинарный алгоритм)
-        /// </summary>
         public static double Power(double number, int power)
         {
-            if (power == 0) return 1;
-            if (power == 1) return number;
+            if (Math.Abs(number - 2.0) < double.Epsilon && power >= 0 && power < 1024)
+            {
+                return PowerOfTwoCache[power];
+            }
 
-            double result = FastPower(number, Math.Abs(power));
-
-            return power > 0 ? result : 1.0 / result;
+            return power == 0 ? 1 : FastPowerIterative(number, power);
         }
 
-        private static double FastPower(double number, int power)
-        {
-            if (power == 0) return 1;
-            if (power == 1) return number;
-
-            double half = FastPower(number, power / 2);
-
-            if ((power & 1) == 0)
-                return half * half;
-            else
-                return half * half * number;
-        }
-
-        /// <summary>
-        /// Возведение в степень (общий случай)
-        /// </summary>
         public static double Power(double number, double power)
         {
             ValidatePowerArguments(number, power);
             return Math.Pow(number, power);
         }
 
+        private static double FastPowerIterative(double number, int power)
+        {
+            double result = 1.0;
+            long p = Math.Abs((long)power);
+            double baseNum = number;
+
+            while (p > 0)
+            {
+                if ((p & 1) == 1)
+                    result *= baseNum;
+
+                baseNum *= baseNum;
+                p >>= 1;
+            }
+
+            return power > 0 ? result : 1.0 / result;
+        }
+
         #endregion
 
         #region Факториал
 
-        /// <summary>
-        /// Кэш для предвычисленных факториалов
-        /// </summary>
-        private static readonly long[] FactorialCache = new long[21];
-
-        static Calculator()
-        {
-            FactorialCache[0] = 1;
-            for (int i = 1; i <= 20; i++)
-            {
-                FactorialCache[i] = FactorialCache[i - 1] * i;
-            }
-        }
-
-        /// <summary>
-        /// Оптимизированное вычисление факториала с использованием кэша
-        /// </summary>
         public static long Factorial(int n)
         {
             ValidateFactorialArgument(n);
@@ -150,24 +144,19 @@ namespace MathLibrary
 
         #region Решение уравнений
 
-        /// <summary>
-        /// Решение квадратного уравнения с оптимизированным вычислением
-        /// </summary>
         public static bool SolveQuadratic(double a, double b, double c, out double? x1, out double? x2)
         {
             x1 = null;
             x2 = null;
 
-            ValidateQuadraticArguments(a, b, c);
-
-            const double epsilon = 1e-12;
+            const double epsilon = double.Epsilon * 100;
 
             if (Math.Abs(a) < epsilon)
             {
-                return SolveLinear(b, c, out x1);
+                return SolveLinearOptimized(b, c, out x1);
             }
 
-            double discriminant = CalculateDiscriminant(a, b, c);
+            double discriminant = b * b - 4 * a * c;
 
             if (discriminant < -epsilon)
                 return false;
@@ -178,24 +167,17 @@ namespace MathLibrary
                 return true;
             }
 
-            // ИСПРАВЛЕНО: передаем c в метод
-            return SolveWithStableFormula(a, b, c, discriminant, out x1, out x2);
-        }
-
-        // ИСПРАВЛЕНО: добавлен параметр c
-        private static bool SolveWithStableFormula(double a, double b, double c, double discriminant, out double? x1, out double? x2)
-        {
             double sqrtD = Math.Sqrt(discriminant);
+            double denominator = 2 * a;
 
-            // Стабильная формула для уменьшения погрешности
             if (b >= 0)
             {
-                x1 = (-b - sqrtD) / (2 * a);
+                x1 = (-b - sqrtD) / denominator;
                 x2 = (2 * c) / (-b - sqrtD);
             }
             else
             {
-                x1 = (-b + sqrtD) / (2 * a);
+                x1 = (-b + sqrtD) / denominator;
                 x2 = (2 * c) / (-b + sqrtD);
             }
 
@@ -209,88 +191,117 @@ namespace MathLibrary
             return true;
         }
 
-        private static bool SolveLinear(double b, double c, out double? x)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool SolveLinearOptimized(double b, double c, out double? x)
         {
             x = null;
 
             if (Math.Abs(b) < double.Epsilon)
-            {
                 return Math.Abs(c) < double.Epsilon;
-            }
 
             x = -c / b;
             return true;
         }
 
-        private static double CalculateDiscriminant(double a, double b, double c)
-        {
-            double bSquared = b * b;
-            double fourAC = 4 * a * c;
+        #endregion
 
-            return bSquared - fourAC;
+        #region Расширенная функциональность
+
+        public static double CircleArea(double radius)
+        {
+            if (radius < 0)
+                throw new ArgumentException("Радиус не может быть отрицательным");
+
+            return Math.PI * radius * radius;
+        }
+
+        public static double CircleAreaFromDiameter(double diameter)
+        {
+            if (diameter < 0)
+                throw new ArgumentException("Диаметр не может быть отрицательным");
+
+            return CircleArea(diameter / 2);
+        }
+
+        public static double CelsiusToFahrenheit(double celsius)
+        {
+            return (celsius * 9 / 5) + 32;
+        }
+
+        public static double FahrenheitToCelsius(double fahrenheit)
+        {
+            return (fahrenheit - 32) * 5 / 9;
+        }
+
+        public static double CelsiusToKelvin(double celsius)
+        {
+            if (celsius < -273.15)
+                throw new ArgumentException("Температура ниже абсолютного нуля");
+
+            return celsius + 273.15;
+        }
+
+        public static double KelvinToCelsius(double kelvin)
+        {
+            if (kelvin < 0)
+                throw new ArgumentException("Температура в Кельвинах не может быть отрицательной");
+
+            return kelvin - 273.15;
+        }
+
+        public static double Hypotenuse(double a, double b)
+        {
+            if (a < 0 || b < 0)
+                throw new ArgumentException("Катеты не могут быть отрицательными");
+
+            return Math.Sqrt(a * a + b * b);
+        }
+
+        public static double Leg(double hypotenuse, double otherLeg)
+        {
+            if (hypotenuse <= 0)
+                throw new ArgumentException("Гипотенуза должна быть положительной");
+
+            if (otherLeg < 0)
+                throw new ArgumentException("Катет не может быть отрицательным");
+
+            if (otherLeg >= hypotenuse)
+                throw new ArgumentException("Катет не может быть больше или равен гипотенузе");
+
+            return Math.Sqrt(hypotenuse * hypotenuse - otherLeg * otherLeg);
         }
 
         #endregion
 
         #region Валидация
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateDivisor(double divisor)
         {
             if (Math.Abs(divisor) < double.Epsilon)
-            {
                 throw new DivideByZeroException("Деление на ноль невозможно");
-            }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateFactorialArgument(int n)
         {
             if (n < 0)
-            {
-                throw new ArgumentException(
-                    $"Факториал отрицательного числа ({n}) не определен. " +
-                    "Факториал определен только для неотрицательных целых чисел.");
-            }
+                throw new ArgumentException("Факториал отрицательного числа не определен");
 
             if (n > 20)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(n),
-                    $"Слишком большое число для вычисления факториала. " +
-                    $"Максимально допустимое значение: 20. Получено: {n}.");
-            }
+                throw new ArgumentOutOfRangeException(nameof(n), "Максимальное значение: 20");
         }
 
         private static void ValidatePowerArguments(double number, double power)
         {
             if (double.IsNaN(number) || double.IsNaN(power))
-            {
-                throw new ArgumentException("Операции с NaN не поддерживаются.");
-            }
+                throw new ArgumentException("Операции с NaN не поддерживаются");
 
             if (Math.Abs(number) < double.Epsilon && power < 0)
-            {
-                throw new ArgumentException("Возведение нуля в отрицательную степень не определено.");
-            }
+                throw new ArgumentException("Возведение нуля в отрицательную степень не определено");
 
             if (number < 0 && Math.Abs(power % 1) > double.Epsilon)
-            {
-                throw new ArgumentException(
-                    "Возведение отрицательного числа в нецелую степень " +
-                    "не определено в действительных числах.");
-            }
-        }
-
-        private static void ValidateQuadraticArguments(double a, double b, double c)
-        {
-            if (double.IsNaN(a) || double.IsNaN(b) || double.IsNaN(c))
-            {
-                throw new ArgumentException("Коэффициенты уравнения не могут быть NaN.");
-            }
-
-            if (double.IsInfinity(a) || double.IsInfinity(b) || double.IsInfinity(c))
-            {
-                throw new ArgumentException("Коэффициенты уравнения не могут быть бесконечностью.");
-            }
+                throw new ArgumentException("Возведение отрицательного числа в нецелую степень не определено");
         }
 
         #endregion

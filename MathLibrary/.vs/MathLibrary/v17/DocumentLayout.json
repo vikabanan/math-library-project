@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "Calculator.cs",
               "ToolTip": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibrary\\Calculator.cs",
               "RelativeToolTip": "Calculator.cs",
-              "ViewState": "AgIAAAkBAAAAAAAAAAAswCkBAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABQBAAAAAAAAAAAswCcBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-28T10:00:49.765Z",
               "EditorCaption": ""
@@ -44,15 +44,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MathLibraryClient",
+              "Title": "MathLibraryClient.csproj",
               "DocumentMoniker": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibraryClient\\MathLibraryClient.csproj",
               "RelativeDocumentMoniker": "..\\MathLibraryClient\\MathLibraryClient.csproj",
               "ToolTip": "C:\\Users\\IIIKY\\Desktop\\MathLibraryProject\\MathLibraryClient\\MathLibraryClient.csproj",
               "RelativeToolTip": "..\\MathLibraryClient\\MathLibraryClient.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-28T10:00:39.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-28T10:00:39.556Z"
             },
             {
               "$type": "Document",
@@ -64,8 +63,7 @@
               "RelativeToolTip": "..\\ConsoleApp1\\ConsoleApp1.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-28T09:56:19.864Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-28T09:56:19.864Z"
             },
             {
               "$type": "Document",
@@ -77,8 +75,7 @@
               "RelativeToolTip": "..\\ConsoleApp1\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-28T09:54:59.904Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-28T09:54:59.904Z"
             },
             {
               "$type": "Document",
@@ -90,8 +87,7 @@
               "RelativeToolTip": "..\\MathLibraryClient\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-28T09:53:27.845Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-28T09:53:27.845Z"
             }
           ]
         }
